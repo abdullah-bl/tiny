@@ -1,0 +1,109 @@
+@import './nav.css';
+@import './print.css';
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+	user-select: none;
+	transition: width 5s, height 5s, linear;
+}
+
+html {
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+html,
+body {
+	height: 100vh;
+	margin: 0;
+}
+
+body {
+	font-family: 'Segoe UI', sans-serif;
+	direction: rtl;
+	user-select: none;
+	background: whitesmoke;
+	color: black;
+	margin: 0;
+	box-sizing: border-box;
+	overflow: scroll;
+}
+
+a {
+	text-decoration: none;
+	font-size: medium;
+	color: black;
+}
+
+h1 {
+	margin: 0 0 10px 0;
+	font-weight: 600;
+	line-height: 1.2;
+}
+p {
+	margin-top: 10px;
+	color: rgb(37, 37, 37);
+}
+
+.container {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	max-width: 30em;
+	margin: 0 auto;
+}
+
+main {
+	margin-top: 3em;
+	padding: 5px;
+}
+
+label {
+	font-size: large;
+	margin: 10px 0 0 0;
+	display: block;
+}
+
+input {
+	width: 100%;
+	padding: 10px;
+	font-size: medium;
+	margin: 10px 0 5px 0px;
+}
+
+small {
+	color: rgb(75, 75, 75);
+}
+
+select {
+	font-size: large;
+	width: 100%;
+	padding: 10px;
+	margin: 10px 0;
+	background: white;
+	border: 2px solid currentColor;
+	/* padding: 6px 41px; */
+	text-align: center;
+}
+
+textarea {
+	display: block;
+	min-width: 100%;
+	max-width: 100%;
+	min-height: 80px;
+	padding: 10px;
+	font-size: medium;
+	margin: 10px 0 5px 0px;
+	font-size: 14pt;
+}
+
+.disabled {
+	filter: grayscale(1);
+	pointer-events: none !important;
+}

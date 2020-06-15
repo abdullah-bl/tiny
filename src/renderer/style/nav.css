@@ -1,0 +1,32 @@
+header {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	display: flex;
+	align-items: center;
+	-webkit-app-region: drag;
+	height: 40px;
+	background: white;
+	user-select: none;
+	/* padding: 0 10px; */
+	text-align: center;
+}
+
+header > a {
+	padding: 10px;
+}
+
+header > a.active {
+	color: white;
+	background: black;
+}
+
+header > span {
+	font-size: large;
+	text-align: center;
+	margin-left: 1em;
+	zoom: 1;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0px);
+}
