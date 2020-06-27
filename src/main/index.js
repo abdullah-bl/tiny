@@ -11,12 +11,15 @@ let mainWindow
 
 function createMainWindow() {
   const window = new BrowserWindow({
-    titleBarStyle: 'hiddenInset',
+    // titleBarStyle: 'hidden',
     backgroundColor: '#000000c0',
     transparent: true,
     show: false,
-    width: 700,
-    height: 500,
+    minWidth: 800,
+    minHeight: 570,
+    width: 900,
+    height: 650,
+    frame: false,
     webPreferences: { nodeIntegration: true }
   })
 
@@ -26,8 +29,8 @@ function createMainWindow() {
 
   if (isDevelopment) {
     window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
-  }
-  else {
+  } else {
+    window.setMenuBarVisibility(false)
     window.loadURL(formatUrl({
       pathname: path.join(__dirname, 'index.html'),
       protocol: 'file',
@@ -68,6 +71,6 @@ app.on('activate', () => {
 })
 
 // create main BrowserWindow when electron is ready
-app.on('ready', () => {
+app.on('ready', async () => {
   mainWindow = createMainWindow()
 })

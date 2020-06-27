@@ -1,0 +1,79 @@
+
+import React, { useEffect, useMemo, useState } from 'react'
+import { connect } from 'unistore/react'
+import { Save } from 'react-feather'
+import ActionBar from '../ActionBar'
+import { setSizes, RoomSchema, Alert, db, beforeInsertRoom } from '../../utils'
+import { Input, Select, TextArea } from '../Input'
+import useForm from '../hooks/useForm'
+import Split from '../Split'
+
+const initialState = {
+  hotel: "",
+  roomNo: "01",
+  isRented: false,
+  numberOfBeds: 1,
+  type: "",
+}
+
+const Add = ({ hotels }) => {
+  const { state, onChange, resetState } = useForm(initialState)
+  const renderHotel = ["اختر", ...hotels.split("،").map(s => s.trim())]
+
+  useEffect(() => {
+    return () => { }
+  }, [])
+  async function Submit(event) {
+    event.preventDefault()
+    try {
+      let doc = await RoomSchema.validateAsync(state)
+      await beforeInsertRoom({ roomNo: doc.roomNo, hotel: doc.hotel })
+      await db.Residence.insert(doc)
+      Alert({ type: 'info', message: 'تم الحفظ بنجاح' })
+      resetState() // reset form
+      document.getElementById('reset').click()
+    } catch (error) {
+      Alert({ type: 'warning', message: 'توجد مشكلة', detail: String(error) })
+    }
+  }
+  return (
+    <Split>
+      <div className='container'>
+        <h1>اضف غرفة </h1>
+        <form noValidate onSubmit={Submit}>
+          <div className='row'>
+            <div className='col-md-4 col-sm-6 col-xs-12' >
+              <Select label='اختر المبنى' id='hotel' defaultValue={state.hotel} onChange={onChange} options={renderHotel} />
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-4'>
+              <Select label='النوع ' id='type' defaultValue={state.type} onChange={onChange} options={["اختر", "غرفة", "جناح", "حظيرة"]} />
+            </div>
+            <div className='col-4'>
+              <Input style={{ textAlign: 'center' }} type='text' caption='لايمكن تكرار رقم الغرفة!' label='رقم الغرفة / الجناح' id='roomNo' placeholder='F01, G01, ...' value={state.roomNo} onChange={onChange} />
+            </div>
+            <div className='col-4'>
+              <Input min={0} lang="en-150" type='number' label='عدد الأسِرَّة' id='numberOfBeds' placeholder='مثلاً ... 1,2,4' value={state.numberOfBeds} onChange={onChange} />
+            </div>
+            <div className='col-12'>
+              <TextArea label='ملاحظات' id='note' placeholder='اكتب ملاحظاتك هنا...' value={state.note} onChange={onChange} />
+            </div>
+          </div>
+          <div style={{ display: 'none' }}>
+            <button id='submit' type='submit'>submit</button>
+            <button id='reset' type='reset'>reset</button>
+          </div>
+        </form>
+      </div>
+      <ActionBar back>
+        <a onClick={Submit}>
+          <span> حفظ </span>
+          <Save />
+        </a>
+      </ActionBar>
+    </Split>
+  )
+}
+
+export default connect('hotels, status, bounds', {})(Add)

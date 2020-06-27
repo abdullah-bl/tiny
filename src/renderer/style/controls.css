@@ -1,0 +1,24 @@
+.controls {
+	position: absolute;
+	left: 5px;
+	top: 14px;
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: row-reverse;
+}
+
+.controls > span {
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	margin-left: 8px;
+	background: #e2e2e2;
+}
+
+#close:hover {
+	background: red;
+}
+
+#minimize:hover {
+	background: orange;
+}

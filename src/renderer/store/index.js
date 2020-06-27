@@ -20,7 +20,7 @@ let store = !is.development ? createStore(initialState) : devtools(createStore(i
 
 
 store.subscribe(state => {
-  console.log(state)
+  console.info('State Changed => ', state)
   setStore(state)
 })
 

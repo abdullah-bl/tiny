@@ -1,20 +1,24 @@
 
 import React, { useState } from 'react'
 import { withRouter, Link } from 'react-router-dom'
-
-const NAV_BAR = [
-  { id: 'إحصائيات', path: '/' },
-  { id: 'إدارة الحجز', path: '/reservation' },
-  { id: 'إدارة السكن', path: '/residence' },
-]
-
+import { Activity, Home, BookOpen } from 'react-feather'
 
 function Header({ location: { pathname } }) {
   return (
     <header>
-      {NAV_BAR.map(nav => <Link to={nav.path} key={nav.id} className={pathname === nav.path ? 'active' : ''}>
-        {nav.id}
-      </Link>)}
+      <span className='logo'> الإسكان </span>
+      <Link to='/' className={pathname === '/' ? 'active' : ''}>
+        <span>إحصائيات </span>
+        <Activity />
+      </Link>
+      <Link to='/residence' className={pathname === '/residence' ? 'active' : ''}>
+        <span>السكن</span>
+        <Home />
+      </Link>
+      <Link to='/reports' className={pathname === '/reports' ? 'active' : ''}>
+        <span>        التقارير</span>
+        <BookOpen />
+      </Link>
     </header>
   )
 }

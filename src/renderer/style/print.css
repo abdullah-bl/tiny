@@ -1,2 +1,27 @@
 @media print {
+	@page {
+		margin: 1cm 1cm;
+	}
+
+	input {
+		display: none;
+	}
+
+	a {
+		display: none;
+	}
+
+	main {
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	header {
+		display: none !important;
+		visibility: hidden;
+	}
+	button {
+		display: none !important;
+		visibility: hidden;
+	}
 }

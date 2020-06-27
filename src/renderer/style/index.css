@@ -1,5 +1,18 @@
+@import './bootstrap-grid.css';
 @import './nav.css';
 @import './print.css';
+@import './controls.css';
+
+:root {
+	--blue: #2c63b1;
+	--red: #e20338;
+	--green: #009688;
+	--black: #231f20;
+	--grey: #d4d4d4;
+	--white: #ffffff;
+	--yellow: #ffd600;
+	--orange: #ff905a;
+}
 
 * {
 	margin: 0;
@@ -8,6 +21,17 @@
 	vertical-align: baseline;
 	user-select: none;
 	transition: width 5s, height 5s, linear;
+}
+
+@font-face {
+	font-family: Quest;
+	src: url('./fonts/ArbFONTS-Questv1-Regular.otf') format('opentype');
+}
+
+@font-face {
+	font-family: Quest-Bold;
+	font-weight: bold;
+	src: url('./fonts/ArbFONTS-Questv1-Bold.otf') format('opentype');
 }
 
 html {
@@ -20,29 +44,33 @@ html {
 }
 html,
 body {
-	height: 100vh;
 	margin: 0;
-}
-
-body {
-	font-family: 'Segoe UI', sans-serif;
+	font-family: 'Quest', 'Segoe UI', sans-serif;
 	direction: rtl;
 	user-select: none;
-	background: whitesmoke;
+	background: white;
 	color: black;
-	margin: 0;
 	box-sizing: border-box;
-	overflow: scroll;
+	overflow: hidden;
+	height: 100vh;
 }
 
 a {
 	text-decoration: none;
 	font-size: medium;
 	color: black;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
-h1 {
-	margin: 0 0 10px 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 1em 0 10px 0;
 	font-weight: 600;
 	line-height: 1.2;
 }
@@ -51,17 +79,28 @@ p {
 	color: rgb(37, 37, 37);
 }
 
-.container {
+/* .container {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	max-width: 30em;
 	margin: 0 auto;
+} */
+
+#app {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
 }
 
-main {
-	margin-top: 3em;
-	padding: 5px;
+#app > main {
+	margin-right: 10px;
+	flex: 1;
+	padding: 2em 0 0.45em 0em;
+}
+
+#app > header > a {
+	width: 100%;
 }
 
 label {
@@ -75,6 +114,7 @@ input {
 	padding: 10px;
 	font-size: medium;
 	margin: 10px 0 5px 0px;
+	background: whitesmoke;
 }
 
 small {
@@ -101,9 +141,142 @@ textarea {
 	font-size: medium;
 	margin: 10px 0 5px 0px;
 	font-size: 14pt;
+	background: whitesmoke;
+	resize: vertical;
 }
 
 .disabled {
-	filter: grayscale(1);
+	/* filter: grayscale(1); */
 	pointer-events: none !important;
+}
+
+table {
+	margin: 2em 0;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: right;
+}
+
+th {
+	height: 48px;
+	vertical-align: middle;
+	border-bottom: 2px solid;
+}
+
+tr {
+	height: 48px;
+	vertical-align: middle;
+	font-weight: normal;
+}
+
+td {
+	font-weight: normal;
+	vertical-align: middle;
+}
+
+tbody > tr:hover {
+	background: rgb(255, 255, 255);
+}
+
+div.search {
+	margin: 1em auto 1em auto;
+	max-width: 23em;
+}
+
+div.card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1em;
+	margin: 0.5em;
+	background: white;
+	text-align: right;
+	box-shadow: 0 0px 2px #9e9e9e;
+	height: 140px;
+	width: 185px;
+	justify-content: center;
+	border-bottom: 3px solid transparent;
+	cursor: default;
+}
+
+.card > span {
+	margin: 0.35em;
+}
+
+.grid {
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	display: flex;
+	align-items: baseline;
+	justify-content: center;
+	align-content: stretch;
+}
+
+.Modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	min-width: 380px;
+	min-height: 400px;
+	background-color: white;
+	padding: 1em;
+	border-radius: 0;
+	outline: black;
+	overflow: scroll;
+	transform: translate(-50%, -50%);
+	box-shadow: 0 0 2px snow;
+}
+
+.Overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #00083814;
+}
+
+button {
+	padding: 5px 20px;
+	text-align: center;
+	margin: 0.35em 0;
+	font-size: medium;
+	background: white;
+	color: black;
+	border: 2px solid transparent;
+	font-weight: 400;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+button.black {
+	background: black;
+	color: white;
+	border: 2px solid black;
+}
+
+div.split {
+	height: 94vh;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+div.split > .content {
+	padding: 0 10px;
+	flex: 1;
+	height: 93vh;
+	overflow: scroll;
+}
+
+svg {
+	width: 20px;
+}
+
+.scroll-area {
+	height: 100%;
+	width: 100%;
+	overflow: scroll;
 }
