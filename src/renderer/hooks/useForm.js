@@ -13,11 +13,15 @@ const useForm = (initialState) => {
     setState({ ...state, [e.target.id]: e.target.value })
   }
 
+  const set = payload => {
+    setState({ ...state, ...payload })
+  }
+
   const resetState = () => {
     setState(initialState)
   }
 
-  return { state, resetState, onChange }
+  return { state, resetState, onChange, set }
 }
 
 export default useForm

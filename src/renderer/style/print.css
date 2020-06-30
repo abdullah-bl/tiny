@@ -3,6 +3,10 @@
 		margin: 1cm 1cm;
 	}
 
+	.action-panel {
+		display: none !important;
+	}
+
 	input {
 		display: none;
 	}

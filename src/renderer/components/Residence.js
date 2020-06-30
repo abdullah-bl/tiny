@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 import { connect } from 'unistore/react'
 import { Plus, Settings } from 'react-feather'
 
-import { Search } from '../Input'
-import { ResidenceCard } from '../Card'
-import { db } from '../../utils'
-import Split from '../Split'
-import ActionBar from '../ActionBar'
+import ResidenceCard from './ResidenceCard'
+import { Search } from './Input'
+import { db } from '../utils'
+import Split from './Split'
+import ActionBar from './ActionBar'
 
 const RenderData = memo(({ query, sort }) => {
   const [data, setData] = useState([])
@@ -23,7 +23,7 @@ const RenderData = memo(({ query, sort }) => {
   }
 
   return (
-    <div className='row'>
+    <div className='row justify-content-md-center'>
       {data && data.map(d => <ResidenceCard key={d._id} {...d} />)}
     </div>
   )
@@ -61,13 +61,9 @@ const Residence = ({ hotels, status }) => {
         <RenderData query={query} sort={sort} />
       </div>
       <ActionBar>
-        <Link to='residence/add'>
+        <Link to='add-room'>
           <span>اضافة غرفة</span>
           <Plus />
-        </Link>
-        <Link to='residence/settings'>
-          <span>اعدادات</span>
-          <Settings />
         </Link>
       </ActionBar>
     </Split>

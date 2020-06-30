@@ -17,8 +17,8 @@ function createMainWindow() {
     show: false,
     minWidth: 800,
     minHeight: 570,
-    width: 900,
-    height: 650,
+    width: 1000,
+    height: 500,
     frame: false,
     webPreferences: { nodeIntegration: true }
   })
@@ -28,9 +28,10 @@ function createMainWindow() {
   }
 
   if (isDevelopment) {
+    window.menuBarVisible = false
     window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
   } else {
-    window.setMenuBarVisibility(false)
+    window.menuBarVisible = false
     window.loadURL(formatUrl({
       pathname: path.join(__dirname, 'index.html'),
       protocol: 'file',

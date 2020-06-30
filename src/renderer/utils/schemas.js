@@ -8,6 +8,7 @@ const Errors = (message) => {
 }
 
 export const GustSchema = Joi.object({
+  roomId: Joi.string().required(),
   id: Joi.number().required().error(Errors('الرقم العسكري او رقم الهوية مطلوب!')),
   name: Joi.string().required().error(Errors('يجب كتابة الاسم!')),
   rank: Joi.string().required().error(Errors(' يجب كتابة الرتبة')),

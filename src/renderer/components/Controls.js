@@ -1,5 +1,5 @@
 import React from 'react'
-import { currentWindow } from '../../utils'
+import { currentWindow } from '../utils'
 
 const Controls = () => {
   const close = () => currentWindow.close()

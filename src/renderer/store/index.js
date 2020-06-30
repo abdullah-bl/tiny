@@ -4,10 +4,8 @@ import devtools from 'unistore/devtools'
 import { is } from 'electron-util'
 
 import { setStore } from './storage'
-import { getSizes } from '../utils'
 
 let initialState = {
-  bounds: getSizes(),
   hotels: "مبنى الضباط، الضيافة الممتازة",
   status: "شاغرة ، غير شاغرة، صيانة، نظافة ، عزل",
   roomRate: 5,

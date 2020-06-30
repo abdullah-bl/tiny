@@ -27,7 +27,7 @@ const ResidenceCard = ({ _id, hotel, roomNo, type, status, note }) => {
     }
   }
   return (
-    <Link to={`/residence/show/${_id}`}>
+    <Link to={`show/${_id}`}>
       <div className='card col' style={{ borderColor: color }} >
         <h3>{hotel}</h3>
         <span> {type} رقم {roomNo} </span>

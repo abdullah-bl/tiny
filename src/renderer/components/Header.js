@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import { Activity, Home, BookOpen } from 'react-feather'
+import { Activity, Home, Settings, BookOpen } from 'react-feather'
 
 function Header({ location: { pathname } }) {
   return (
@@ -18,6 +18,10 @@ function Header({ location: { pathname } }) {
       <Link to='/reports' className={pathname === '/reports' ? 'active' : ''}>
         <span>        التقارير</span>
         <BookOpen />
+      </Link>
+      <Link to='/settings' className={pathname === '/settings' ? 'active' : ''}>
+        <span>        الإعدادات</span>
+        <Settings />
       </Link>
     </header>
   )

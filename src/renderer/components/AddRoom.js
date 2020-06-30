@@ -2,11 +2,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { connect } from 'unistore/react'
 import { Save } from 'react-feather'
-import ActionBar from '../ActionBar'
-import { setSizes, RoomSchema, Alert, db, beforeInsertRoom } from '../../utils'
-import { Input, Select, TextArea } from '../Input'
+
+import ActionBar from './ActionBar'
+import Split from './Split'
+import { Input, Select, TextArea } from './Input'
 import useForm from '../hooks/useForm'
-import Split from '../Split'
+import { RoomSchema, Alert, db, beforeInsertRoom } from '../utils'
 
 const initialState = {
   hotel: "",
@@ -33,7 +34,7 @@ const Add = ({ hotels }) => {
       resetState() // reset form
       document.getElementById('reset').click()
     } catch (error) {
-      Alert({ type: 'warning', message: 'توجد مشكلة', detail: String(error) })
+      Alert({ title: 'الإسكان', type: 'error', message: 'خطأ في ادخال البيانات', detail: String(error) })
     }
   }
   return (

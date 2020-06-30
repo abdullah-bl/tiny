@@ -94,9 +94,8 @@ p {
 }
 
 #app > main {
-	margin-right: 10px;
 	flex: 1;
-	padding: 2em 0 0.45em 0em;
+	padding: 0.4em 0.4em 0.4em 0em;
 }
 
 #app > header > a {
@@ -151,7 +150,7 @@ textarea {
 }
 
 table {
-	margin: 2em 0;
+	margin: 0.35em 0;
 	border-collapse: collapse;
 	width: 100%;
 	text-align: right;
@@ -258,16 +257,17 @@ button.black {
 }
 
 div.split {
-	height: 94vh;
+	height: 98vh;
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	/* align-items: baseline; */
 }
 
 div.split > .content {
 	padding: 0 10px;
 	flex: 1;
-	height: 93vh;
+	height: 98vh;
 	overflow: scroll;
 }
 
@@ -279,4 +279,9 @@ svg {
 	height: 100%;
 	width: 100%;
 	overflow: scroll;
+}
+
+.row {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
 }

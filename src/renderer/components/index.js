@@ -8,10 +8,11 @@ import Controls from './Controls'
 
 import Home from './Home'
 import Residence from './Residence'
-import Add from './Residence/Add'
-import Show from './Residence/Show'
-import Edit from './Residence/Edit'
-import ResidenceSettings from './Residence/Settings'
+import AddRoom from './AddRoom'
+import AddGust from './AddGust'
+import ShowRoom from './ShowRoom'
+import Settings from './Settings'
+import Reservation from './Reservation'
 
 ReactModal.setAppElement('#app')
 
@@ -23,10 +24,11 @@ const Pages = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/residence" component={Residence} />
-        <Route exact path="/residence/add" component={Add} />
-        <Route exact path="/residence/show/:_id" component={Show} />
-        <Route exact path="/residence/edit/:_id" component={Edit} />
-        <Route exact path="/residence/settings" component={ResidenceSettings} />
+        <Route exact path="/add-room" component={AddRoom} />
+        <Route exact path="/add-gust/:_id" component={AddGust} />
+        <Route exact path="/show/:_id" component={ShowRoom} />
+        <Route exact path="/reservation/:_id" component={Reservation} />
+        <Route exact path="/settings" component={Settings} />
         <Route render={Home} />
       </Switch>
     </>
