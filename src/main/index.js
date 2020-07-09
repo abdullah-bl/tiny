@@ -11,15 +11,12 @@ let mainWindow
 
 function createMainWindow() {
   const window = new BrowserWindow({
-    // titleBarStyle: 'hidden',
-    backgroundColor: '#000000c0',
-    transparent: true,
     show: false,
     minWidth: 800,
-    minHeight: 570,
+    minHeight: 500,
     width: 1000,
     height: 500,
-    frame: false,
+    title: 'الإسكان',
     webPreferences: { nodeIntegration: true }
   })
 

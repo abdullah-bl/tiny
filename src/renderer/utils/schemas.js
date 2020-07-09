@@ -7,6 +7,13 @@ const Errors = (message) => {
   return err
 }
 
+export const CommandSchema = Joi.object({
+  roomId: Joi.string().required(),
+  type: Joi.valid("صيانة", "عزل", "نظافة").error(Errors('يجب ان تحدد نوع الطلب !')),
+  done: Joi.boolean().default(false),
+  note: Joi.string().allow('')
+})
+
 export const GustSchema = Joi.object({
   roomId: Joi.string().required(),
   id: Joi.number().required().error(Errors('الرقم العسكري او رقم الهوية مطلوب!')),
@@ -17,7 +24,8 @@ export const GustSchema = Joi.object({
   checkIn: Joi.date().default(new Date()),
   checkOut: Joi.date().allow(""),
   nights: Joi.number().default(0),
-  paid: Joi.boolean().default(false)
+  paid: Joi.boolean().default(false),
+  officer: Joi.boolean().default(false)
 })
 
 export const ReservationSchema = Joi.object({
@@ -40,6 +48,18 @@ export const RoomSchema = Joi.object({
   numberOfBeds: Joi.number().default(1),
   type: Joi.valid("غرفة", "جناح", "حظيرة").default("غرفة"),
   status: Joi.valid("غير شاغرة", "شاغرة", "صيانة", "عزل", "نظافة").default("شاغرة"),
-  location: Joi.string().allow(''),
   note: Joi.string().allow('')
+})
+
+export const UpdateRoomSchema = Joi.object({
+  _id: Joi.string(),
+  hotel: Joi.string().required().error(Errors('يجب اختيار المبنى!')),
+  roomNo: Joi.string().required(),
+  isRented: Joi.boolean().default(false),
+  numberOfBeds: Joi.number().default(1),
+  type: Joi.valid("غرفة", "جناح", "حظيرة").default("غرفة"),
+  status: Joi.valid("غير شاغرة", "شاغرة", "صيانة", "عزل", "نظافة").default("شاغرة"),
+  note: Joi.string().allow(''),
+  createdAt: Joi.date(),
+  updatedAt: Joi.date(),
 })

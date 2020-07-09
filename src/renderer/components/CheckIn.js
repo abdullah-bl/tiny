@@ -13,10 +13,11 @@ const gust = {
   rank: '',
   unit: '',
   phone: '',
-  checkIn: new Date()
+  checkIn: new Date(),
+  officer: false
 }
 
-const AddGust = ({ history: { goBack }, match: { params: { _id } } }) => {
+const CheckIn = ({ history: { goBack }, match: { params: { _id } } }) => {
   const { state, onChange, set } = useForm(gust)
 
   useEffect(() => {
@@ -28,16 +29,17 @@ const AddGust = ({ history: { goBack }, match: { params: { _id } } }) => {
       let doc = await GustSchema.validateAsync(state)
       await db.Reservation.insert(doc)
       await db.Residence.update({ _id }, { $set: { isRented: true, status: 'غير شاغرة' } })
-      Alert({ message: 'Done' })
+      Alert({ message: 'تم بنجاح', detail: `تم تسجيل الدخول لـ (${doc.name}) ` })
       goBack()
     } catch (error) {
       console.log('error', error)
+      Alert({ type: 'error', message: error.message })
     }
   }
 
   return (
-    <Split>
-      <div className='content'>
+    <>
+      <main>
         <div className='row'>
           <div className='col' style={{ textAlign: 'center' }}>
             <h1>اضافة نزيل</h1>
@@ -61,15 +63,15 @@ const AddGust = ({ history: { goBack }, match: { params: { _id } } }) => {
             <Input defaultValue={state.checkIn} onChange={onChange} label='تاريخ الدخول' id='checkIn' type='date' />
           </div>
         </div>
-      </div>
+      </main>
       <ActionBar back>
         <a onClick={save}>
           <span>تسجيل الدخول</span>
           <LogIn />
         </a>
       </ActionBar>
-    </Split>
+    </>
   )
 }
 
-export default AddGust
+export default CheckIn

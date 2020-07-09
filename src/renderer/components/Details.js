@@ -2,9 +2,9 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { connect } from 'unistore/react'
 import { Link } from 'react-router-dom'
-import { LogIn, LogOut, Trash, Printer } from 'react-feather'
+import { LogIn, LogOut, Trash, Printer, Command, Edit } from 'react-feather'
 import ActionBar from './ActionBar'
-import { RoomSchema, Alert, db } from '../utils'
+import { RoomSchema, Alert, db, setColor } from '../utils'
 import RoomHistory from './RoomHistory'
 import RoomRentals from './RoomRentals'
 import { Input, Select, TextArea } from './Input'
@@ -26,14 +26,11 @@ const Show = ({ hotels, status, roomRate, suiteRate, history: { goBack }, match:
     return setData(data)
   }
 
-  async function logout() {
-    // let
-  }
-
   async function remove() {
     let c = confirm(`هل أنت متأكد تريد حذف ال${data.type}`)
     if (c) {
       await db.Residence.remove({ _id })
+      await db.History.remove({ roomId: _id })
       goBack()
     }
   }
@@ -41,37 +38,44 @@ const Show = ({ hotels, status, roomRate, suiteRate, history: { goBack }, match:
   const rate = data.type === 'جناح' ? suiteRate : roomRate
 
   return (
-    <Split>
-      <div className='content'>
-        <div className='row justify-content-md-center' style={{ textAlign: 'center', marginBottom: '2em' }}>
-          <div className='col-12' style={{ textAlign: 'center', marginBottom: '2em' }}>
+    <>
+      <main>
+        <div className='row' style={{ marginBottom: '1em' }}>
+          <div className='col-12' style={{ textAlign: 'center' }}>
             <h2> {data.hotel} {data.type} رقم ({data.roomNo}) </h2>
           </div>
-          <div className='col'>
-            <h4> السعر {rate} ريال </h4>
-            <h5>  لليلة الواحدة </h5>
+          <div className='col-12'>
+            <h3>تفاصيل الـ{data.type}</h3>
           </div>
-          <div className='col'>
-            <h4>عدد الاسرة</h4>
-            <h4>{data.numberOfBeds}</h4>
+          <div className='col-12'>
+            <span> السعر الليلة : {rate} ريال </span>
           </div>
-          <div className='col'>
-            <h4>حالة ال{data.type}</h4>
-            <h4>{data.status}</h4>
+          <div className='col-12'>
+            <span>عدد الاسرة : {data.numberOfBeds}</span>
+          </div>
+          <div className='col-12'>
+            <span>حالة الـ{data.type} : <span style={{ color: setColor(data.status) }}>{data.status}</span> </span>
+          </div>
+          <div className='col-12'>
+            <span>الملاحظات : {data.note ? data.note : 'لا يوجد'}</span>
           </div>
         </div>
         <RoomRentals roomId={_id} />
         <RoomHistory roomId={_id} />
-      </div>
+      </main>
       <ActionBar back>
-        <Link to={`/add-gust/${_id}`} className={data.isRented ? 'disabled' : ''}>
+        <Link to={`/edit/${_id}`}>
+          <span>   تعديل ال{data.type} </span>
+          <Edit />
+        </Link>
+        <Link to={`/check-in/${_id}`} className={data.isRented ? 'disabled' : ''}>
           <span>تسجيل دخول</span>
           <LogIn />
         </Link>
-        <a onClick={logout} className={!data.isRented ? 'disabled' : ''} >
-          <span>تسجيل خروج</span>
-          <LogOut />
-        </a>
+        <Link to={`/add-command/${_id}`}>
+          <span>طلب صيانة / نظافة</span>
+          <Command />
+        </Link>
         <a onClick={() => print()} >
           <span>طباعة</span>
           <Printer />
@@ -81,7 +85,7 @@ const Show = ({ hotels, status, roomRate, suiteRate, history: { goBack }, match:
           <Trash />
         </a>
       </ActionBar>
-    </Split>
+    </>
   )
 }
 

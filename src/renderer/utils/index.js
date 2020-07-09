@@ -1,7 +1,7 @@
 const { remote } = window.require('electron')
-export { RoomSchema, ReservationSchema, GustSchema } from './schemas'
+export { RoomSchema, ReservationSchema, GustSchema, CommandSchema, UpdateRoomSchema } from './schemas'
 export { default as db } from './db'
-export { beforeInsertRoom } from './extra'
+export { beforeInsertRoom, groupBy, setColor, ChangeStatus, CountNights, NightsText } from './extra'
 export { default as islamicDate } from './islamicDate'
 
 const { Menu, MenuItem } = remote

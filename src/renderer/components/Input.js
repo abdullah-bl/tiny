@@ -10,6 +10,14 @@ export const Input = ({ label, id, caption, ...rest }) => (
   </>
 )
 
+export const Radios = ({ label, id, caption, radios = [], ...rest }) => (
+  <>
+    {label && <label htmlFor={id}>{label}</label>}
+    <input id={id} {...rest} />
+    {caption && <small>{caption}</small>}
+  </>
+)
+
 export const Select = ({ label, id, caption, options = [], ...rest }) => (
   <>
     {label && <label htmlFor={id}>{label}</label>}

@@ -56,8 +56,8 @@ header > a.active {
 	border-right: 2px solid #f9f9f9;
 	display: flex;
 	flex-direction: column;
-	height: 94vh;
-	margin-top: 2em;
+	height: 100vh;
+	margin-top: 0em;
 }
 
 .action-panel > a {
