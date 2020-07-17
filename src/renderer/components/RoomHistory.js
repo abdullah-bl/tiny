@@ -16,12 +16,15 @@ const RoomHistory = ({ roomId }) => {
   }
 
   const remove = async (_id, roomId) => {
-    try {
-      await db.History.remove({ _id })
-      ChangeStatus(roomId)
-      getData()
-    } catch (error) {
-      console.log(error)
+    let conf = confirm('هل أنت متأكد ؟')
+    if (conf) {
+      try {
+        await db.History.remove({ _id })
+        ChangeStatus(roomId)
+        getData()
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
@@ -38,7 +41,7 @@ const RoomHistory = ({ roomId }) => {
   return data.length > 0 && (
     <div className='row'>
       <div className='col-12'>
-        <h3>طلبات الصيانة و النظافة  ( {data.length} )</h3>
+        <h4>طلبات الصيانة و النظافة  ( {data.length} )</h4>
       </div>
       {data.map((d, index) =>
         <div className='col-12' key={d._id}>
@@ -49,14 +52,14 @@ const RoomHistory = ({ roomId }) => {
               <span>حالة الطلب :  {d.done ? 'تم التنفيذ' : 'تحت الاجراء'}</span>
             </div>
             {!d.done &&
-              <div className='col-4' className='no-print'>
+              <div className='col-4' className='no-print' style={{ flex: 1 }}>
                 <span>الإجراءات</span>
                 <div>
-                  <a onClick={() => update(d._id, roomId)}>
+                  <a onClick={() => update(d._id, roomId)} style={{ color: 'var(--blue)' }}>
                     <span>تم التنفيذ</span>
                     <Check size={18} />
                   </a>
-                  <a onClick={() => remove(d._id, roomId)}>
+                  <a onClick={() => remove(d._id, roomId)} style={{ color: 'var(--red)' }}>
                     <span>حذف الطلب</span>
                     <Trash size={18} />
                   </a>

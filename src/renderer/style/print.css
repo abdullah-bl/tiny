@@ -3,20 +3,41 @@
 		display: none !important;
 	}
 
+	*::-webkit-scrollbar {
+		width: 0 !important;
+	}
+
+	#app {
+		overflow: hidden;
+	}
+
+	header,
+	footer,
+	aside,
+	form {
+		display: none;
+	}
+
+	article {
+		width: 100% !important;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+
 	@page {
 		size: A4;
 		margin: 1cm 1cm;
 		page-break-before: always;
 		page-break-inside: avoid;
+		content: 'Page ' counter(page) ' of ' counter(pages);
+	}
+	@page: bottom-left {
+		content: 'Page ' counter(page);
 	}
 
-	@page: left{
-		@bottom-left {
-			content: 'Page ' counter(page) ' of ' counter(pages);
-		}
-	};
-
-	* {
+	table {
+		margin: 1em 0;
+		page-break-inside: avoid;
 		font-size: 11pt !important;
 	}
 
@@ -37,13 +58,10 @@
 		display: none;
 	}
 
-	#app {
-		height: 100% !important;
-	}
-
 	main {
 		margin: 0 !important;
 		padding: 0 !important;
+		height: 100% !important;
 		/* height: auto !important; */
 	}
 
@@ -72,3 +90,104 @@
 		margin: 1em 0;
 	}
 }
+/*
+@media print {
+	body {
+		width: 100% !important;
+		height: 100% !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		line-height: 1.45;
+		color: #000;
+		background: none;
+		font-size: 12pt;
+	}
+
+	/* main 
+	#app {
+		height: inherit;
+	}
+
+	#app > main {
+		height: inherit;
+	}
+
+	/* Headings 
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		page-break-after: avoid;
+	}
+
+	h1 {
+		font-size: 19pt;
+	}
+	h2 {
+		font-size: 17pt;
+	}
+	h3 {
+		font-size: 15pt;
+	}
+	h4,
+	h5,
+	h6 {
+		font-size: 14pt;
+	}
+
+	p,
+	h2,
+	h3 {
+		orphans: 3;
+		widows: 3;
+	}
+
+	hr {
+		background-color: #ccc;
+	}
+
+	/* Table 
+	table {
+		margin: 1px;
+		text-align: right;
+	}
+
+	th {
+		border-bottom: 1px solid #333;
+		font-weight: bold;
+	}
+
+	td {
+		border-bottom: 1px solid rgb(223, 223, 223);
+	}
+
+	th,
+	td {
+		padding: 4px 10px 4px 0;
+	}
+	tfoot {
+		font-style: italic;
+	}
+	caption {
+		background: #fff;
+		margin-bottom: 2em;
+		text-align: left;
+	}
+	thead {
+		display: table-header-group;
+	}
+	img,
+	tr {
+		page-break-inside: avoid;
+	}
+
+	/* Hide various parts from the site
+	header,
+	footer,
+	.action-panel {
+		display: none;
+	}
+}
+*/

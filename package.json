@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"@hapi/joi": "^17.1.1",
+		"datejs": "^1.0.0-rc3",
 		"electron-nedb": "https://github.com/abdullah-bl/electron-nedb",
 		"electron-store": "^5.2.0",
 		"electron-util": "^0.14.1",

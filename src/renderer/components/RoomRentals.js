@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { db, islamicDate } from '../utils'
+import Table from './table'
 
 const RoomRentals = ({ history: { push }, roomId }) => {
   const [data, setData] = useState([])
@@ -20,34 +21,21 @@ const RoomRentals = ({ history: { push }, roomId }) => {
   return data.length > 0 && (
     <div className='row' style={{ marginBottom: '2em' }}>
       <div className='col-12'>
-        <h3> الساكنين ( {data.length} ) </h3>
+        <h4> الساكنين ( {data.length} ) </h4>
       </div>
       <div className='col-12'>
-        {data.map((d, index) =>
-          <div className='row' key={d._id} onClick={() => push(`/reservation/${d._id}`)}>
-            <div className='col-12'>
-              <span>تسلسل  : {index + 1} </span>
-            </div>
-            <div className='col-auto'>
-              <span>الرقم العسكري : {d.id} </span>
-            </div>
-            <div className='col-auto'>
-              <span>الرتبة : {d.rank} </span>
-            </div>
-            <div className='col-auto'>
-              <span>الاسم : {d.name} </span>
-            </div>
-            <div className='col-auto'>
-              <span>الوحدة : {d.unit} </span>
-            </div>
-            <div className='col-12'>
-              <span>الدخول : {islamicDate(d.checkIn)} </span>
-            </div>
-            <div className='col-12'>
-              <span>الخروج : {d.checkOut ? islamicDate(d.checkOut) : 'لم يتم الخروج'} </span>
-            </div>
-          </div>
-        )}
+        <Table rows={['ت', 'الرقم العسكري', 'الرتبة', 'الاسم', 'تاريخ الخروج']}>
+          {data.map((d, index) =>
+            <tr key={d._id} onClick={() => push(`/reservation/${d._id}`)}>
+              <td>{index + 1}</td>
+              <td>{d.id}</td>
+              <td>{d.rank}</td>
+              <td>{d.name}</td>
+              <td>{d.checkOut ? islamicDate(d.checkOut) : ''}</td>
+
+            </tr>
+          )}
+        </Table>
       </div>
     </div>
   )

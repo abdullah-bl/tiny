@@ -72,6 +72,19 @@ header > a.active {
 	cursor: default;
 }
 
+.action-panel > label {
+	font-size: 12pt;
+	margin: 10px 10px 0px 10px;
+}
+
+.action-panel > div {
+	font-size: 12pt;
+	margin: 0 6px;
+}
+.action-panel > div > * {
+	font-size: 12pt;
+}
+
 /* .action-bar {
 	padding-top: 3em;
 	width: 12em;

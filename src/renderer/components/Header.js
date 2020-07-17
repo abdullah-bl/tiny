@@ -23,7 +23,7 @@ function Header({ location: { pathname } }) {
         <span>        الإعدادات</span>
         <Settings />
       </Link>
-    </header>
+    </header >
   )
 }
 

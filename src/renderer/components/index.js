@@ -1,12 +1,12 @@
 
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import ReactModal from 'react-modal'
 
 import Header from './Header'
 
 import Home from './Home'
 import Residence from './Residence'
+import Reports from './Reports'
 import Add from './Add'
 import Edit from './Edit'
 import CheckIn from './CheckIn'
@@ -15,14 +15,13 @@ import Details from './Details'
 import Settings from './Settings'
 import Reservation from './Reservation'
 
-ReactModal.setAppElement('#app')
-
 const Pages = () => {
   return (
     <>
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/reports" component={Reports} />
         <Route exact path="/residence" component={Residence} />
         <Route exact path="/add" component={Add} />
         <Route exact path="/edit/:_id" component={Edit} />

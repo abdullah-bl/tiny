@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { connect } from 'unistore/react'
 import { Link } from 'react-router-dom'
-import { LogIn, LogOut, Trash, Printer, Command, Edit } from 'react-feather'
+import { UserPlus, Trash, Printer, AlertTriangle, Edit } from 'react-feather'
 import ActionBar from './ActionBar'
 import { RoomSchema, Alert, db, setColor } from '../utils'
 import RoomHistory from './RoomHistory'
@@ -11,7 +11,7 @@ import { Input, Select, TextArea } from './Input'
 import Split from './Split'
 
 
-const Show = ({ hotels, status, roomRate, suiteRate, history: { goBack }, match: { params: { _id } } }) => {
+const Show = ({ hotels, status, barnRate, roomRate, suiteRate, history: { goBack }, match: { params: { _id } } }) => {
   const [data, setData] = useState({})
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -35,17 +35,18 @@ const Show = ({ hotels, status, roomRate, suiteRate, history: { goBack }, match:
     }
   }
 
-  const rate = data.type === 'جناح' ? suiteRate : roomRate
+  const rate = data.type === 'جناح' ? suiteRate : data.type === 'غرفة' ? roomRate : barnRate
 
   return (
     <>
       <main>
         <div className='row' style={{ marginBottom: '1em' }}>
           <div className='col-12' style={{ textAlign: 'center' }}>
-            <h2> {data.hotel} {data.type} رقم ({data.roomNo}) </h2>
+            <h3> مبنى {data.hotel} </h3>
+            <h4> {data.type} رقم ({data.roomNo}) </h4>
           </div>
           <div className='col-12'>
-            <h3>تفاصيل الـ{data.type}</h3>
+            <h4> التفاصيل </h4>
           </div>
           <div className='col-12'>
             <span> السعر الليلة : {rate} ريال </span>
@@ -70,17 +71,17 @@ const Show = ({ hotels, status, roomRate, suiteRate, history: { goBack }, match:
         </Link>
         <Link to={`/check-in/${_id}`} className={data.isRented ? 'disabled' : ''}>
           <span>تسجيل دخول</span>
-          <LogIn />
+          <UserPlus />
         </Link>
         <Link to={`/add-command/${_id}`}>
           <span>طلب صيانة / نظافة</span>
-          <Command />
+          <AlertTriangle />
         </Link>
         <a onClick={() => print()} >
           <span>طباعة</span>
           <Printer />
         </a>
-        <a onClick={remove} className={data.isRented ? 'disabled' : ''}>
+        <a onClick={remove} className={data.isRented ? 'disabled' : ''} style={{ color: 'var(--red)' }}>
           <span>   حذف ال{data.type} </span>
           <Trash />
         </a>
@@ -89,4 +90,4 @@ const Show = ({ hotels, status, roomRate, suiteRate, history: { goBack }, match:
   )
 }
 
-export default connect('hotels, status, roomRate, suiteRate', {})(Show)
+export default connect('hotels, status, roomRate, suiteRate, barnRate', {})(Show)

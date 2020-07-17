@@ -16,29 +16,31 @@ export const CommandSchema = Joi.object({
 
 export const GustSchema = Joi.object({
   roomId: Joi.string().required(),
-  id: Joi.number().required().error(Errors('الرقم العسكري او رقم الهوية مطلوب!')),
   name: Joi.string().required().error(Errors('يجب كتابة الاسم!')),
-  rank: Joi.string().required().error(Errors(' يجب كتابة الرتبة')),
-  unit: Joi.string().required().error(Errors(' يجب كتابة الوحدة')),
+  id: Joi.number().required().error(Errors('تأكد من كتابة الرقم العسكري!!')),
+  rank: Joi.string().required().error(Errors(' يجب اختيار الرتبة')),
+  unit: Joi.string().required().error(Errors(' يجب اختيار الوحدة')),
   phone: Joi.string().allow(''),
   checkIn: Joi.date().default(new Date()),
   checkOut: Joi.date().allow(""),
   nights: Joi.number().default(0),
   paid: Joi.boolean().default(false),
-  officer: Joi.boolean().default(false)
+  total: Joi.number().default(0.00),
+  officer: Joi.boolean().default(false),
 })
 
 export const ReservationSchema = Joi.object({
   id: Joi.number().required().error(Errors('الرقم العسكري او رقم الهوية مطلوب!')),
   name: Joi.string().required().error(Errors('يجب كتابة الاسم!')),
-  rank: Joi.string().required().error(Errors(' يجب كتابة الرتبة')),
+  rank: Joi.string().required().error(Errors(' يجب اختيار الرتبة')),
   unit: Joi.string().required().error(Errors(' يجب كتابة الوحدة')),
   phone: Joi.string().allow(''),
   roomId: Joi.string().required().error(Errors('يجب اختيار الغرفة / الجناح')),
   checkIn: Joi.date().default(new Date()),
   checkOut: Joi.date().allow(""),
   nights: Joi.number().default(0),
-  paid: Joi.boolean().default(false)
+  paid: Joi.boolean().default(false),
+  total: Joi.boolean().default(0.00)
 })
 
 export const RoomSchema = Joi.object({

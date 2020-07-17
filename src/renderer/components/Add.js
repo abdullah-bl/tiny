@@ -18,7 +18,7 @@ const initialState = {
 
 const Add = ({ hotels }) => {
   const { state, onChange, resetState } = useForm(initialState)
-  const renderHotel = ["اختر", ...hotels.split(".").map(s => s.trim())]
+  const renderHotel = ["اختر", ...hotels.split(/\n/).map(s => s.trim())]
 
   useEffect(() => {
     return () => { }
@@ -48,13 +48,13 @@ const Add = ({ hotels }) => {
               </div>
             </div>
             <div className='row'>
-              <div className='col-4'>
+              <div className='col-md-4 col-sm-6 col-xs-12'>
                 <Select label='النوع ' id='type' defaultValue={state.type} onChange={onChange} options={["اختر", "غرفة", "جناح", "حظيرة"]} />
               </div>
-              <div className='col-4'>
-                <Input style={{ textAlign: 'center' }} type='text' caption='لايمكن تكرار رقم الغرفة!' label='رقم الغرفة / الجناح' id='roomNo' placeholder='F01, G01, ...' value={state.roomNo} onChange={onChange} />
+              <div className='col-md-4 col-sm-6 col-xs-12'>
+                <Input style={{ textAlign: 'center' }} type='text' caption='لايمكن تكرار رقم الغرفة!' label='رقم الجناح / الغرفة...' id='roomNo' placeholder='مثلاً ... 101 , G01, F02' value={state.roomNo} onChange={onChange} />
               </div>
-              <div className='col-4'>
+              <div className='col-md-4 col-sm-6 col-xs-12'>
                 <Input min={0} lang="en-150" type='number' label='عدد الأسِرَّة' id='numberOfBeds' placeholder='مثلاً ... 1,2,4' value={state.numberOfBeds} onChange={onChange} />
               </div>
               <div className='col-12'>

@@ -12,10 +12,10 @@ let mainWindow
 function createMainWindow() {
   const window = new BrowserWindow({
     show: false,
-    minWidth: 800,
-    minHeight: 500,
+    minWidth: 900,
+    minHeight: 550,
     width: 1000,
-    height: 500,
+    height: 560,
     title: 'الإسكان',
     webPreferences: { nodeIntegration: true }
   })

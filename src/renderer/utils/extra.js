@@ -4,7 +4,7 @@ import db from './db'
 export const beforeInsertRoom = async query => {
   let room = await db.Residence.findOne(query)
   if (room) {
-    let error = new Error('رقم الغرفة / الجناح موجد مسبقاً')
+    let error = new Error(`رقم الجناح / الغرفة / الحظيرة موجود مسبقاً !`)
     error.name = ''
     throw error
   }
@@ -58,16 +58,21 @@ export const ChangeStatus = async roomId => {
   }
 }
 
-export const CountNights = (nights = 0, checkIn, checkOut = new Date()) => {
-  const first = new Date(checkIn)
-  const secend = new Date(checkOut)
-  const cal = secend.getTime() - first.getTime()
-  return nights > 0 ? nights : Math.round(cal / (1000 * 3600 * 24))
-  // const text = count === 1 ? 'ليلة' : count === 2 ? 'ليلتين' : count < 11 ? 'ليالي' : 'ليلة'
+export const CountNights = (checkIn, checkOut = new Date().setHours(9, 0, 0, 0)) => {
+  const start = new Date(checkIn)
+  const end = new Date(checkOut)
+  let dayCount = 0
+  while (end > start) {
+    dayCount++
+    start.setDate(start.getDate() + 1)
+  }
+  return dayCount
 }
 
 export const NightsText = (nights = 0) => {
-  if (nights === 1) {
+  if (nights === 0) {
+    return `لم يكمل الليلة`
+  } else if (nights === 1) {
     return `ليلة واحدة`
   } else if (nights === 2) {
     return 'ليلتين'
@@ -75,4 +80,22 @@ export const NightsText = (nights = 0) => {
     return `${nights} ليالي`
   }
   return `${nights} ليلة`
+}
+
+
+
+export const reportsOptions = [
+  // { label: 'تقرير يومي', value: 'daily' },
+  { label: 'تقرير اسبوعي', value: 'weekly' },
+  { label: 'تقرير شهري', value: 'monthly' },
+  { label: 'تقرير سنوي', value: 'yearly' },
+  // { label: 'تقرير مخصص', value: 'specific' },
+]
+
+export const years = () => {
+  const a = []
+  for (var y = 2020; y < 2030; y++) {
+    a.push(y)
+  }
+  return a
 }
