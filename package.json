@@ -15,7 +15,7 @@
 		"electron-nedb": "https://github.com/abdullah-bl/electron-nedb",
 		"electron-store": "^5.2.0",
 		"electron-util": "^0.14.1",
-		"lodash": "^4.17.15",
+		"lodash": "^4.17.19",
 		"match-sorter": "^4.1.0",
 		"mousetrap": "^1.6.5",
 		"prop-types": "^15.7.2",
