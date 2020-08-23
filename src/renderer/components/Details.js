@@ -8,7 +8,6 @@ import { RoomSchema, Alert, db, setColor } from '../utils'
 import RoomHistory from './RoomHistory'
 import RoomRentals from './RoomRentals'
 import { Input, Select, TextArea } from './Input'
-import Split from './Split'
 
 
 const Show = ({ hotels, status, barnRate, roomRate, suiteRate, history: { goBack }, match: { params: { _id } } }) => {

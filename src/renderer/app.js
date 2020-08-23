@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react'
 import { HashRouter } from 'react-router-dom'
 import { connect } from 'unistore/react'

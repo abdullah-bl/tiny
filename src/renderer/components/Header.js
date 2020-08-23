@@ -8,7 +8,7 @@ function Header({ location: { pathname } }) {
     <header>
       <span className='logo'> الإسكان </span>
       <Link to='/' className={pathname === '/' ? 'active' : ''}>
-        <span>إحصائيات </span>
+        <span>إحصائيات عامة</span>
         <Activity />
       </Link>
       <Link to='/residence' className={pathname === '/residence' ? 'active' : ''}>

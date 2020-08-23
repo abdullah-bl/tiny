@@ -17,20 +17,20 @@ const RenderData = withRouter(({ history, data = [] }) => {
   ))
 })
 
-const Group = ({ query, sort }) => {
+const Group = ({ query, sort, limit = 1000 }) => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    getData({ query, sortBy: sort })
+    getData({ query, sortBy: sort, limit })
   }, [query, sort])
 
   async function getData({ query = {}, sortBy = { 'roomNo': 1 } }) {
-    const data = await db.Residence.find(query).sort(sortBy)
+    const data = await db.Residence.find(query).sort(sortBy).limit(limit)
     let docs = Object.entries(groupBy(data, 'hotel'))
     return setData(docs)
   }
   return data.length > 0 ? data.map((doc, index) => (
-    <div className='row' key={index}>
+    <div className='row justify-content-md-center' key={index}>
       <div className='col-12'>
         <h3>{doc[0]} - ({doc[1].length})</h3>
       </div>

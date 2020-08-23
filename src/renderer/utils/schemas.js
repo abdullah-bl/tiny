@@ -8,6 +8,7 @@ const Errors = (message) => {
 }
 
 export const CommandSchema = Joi.object({
+  orderNo: Joi.number().default(() => Math.random().toPrecision(5).slice(2)),
   roomId: Joi.string().required(),
   type: Joi.valid("صيانة", "عزل", "نظافة").error(Errors('يجب ان تحدد نوع الطلب !')),
   done: Joi.boolean().default(false),
@@ -48,7 +49,7 @@ export const RoomSchema = Joi.object({
   roomNo: Joi.string().required(),
   isRented: Joi.boolean().default(false),
   numberOfBeds: Joi.number().default(1),
-  type: Joi.valid("غرفة", "جناح", "حظيرة").default("غرفة"),
+  type: Joi.valid("غرفة", "جناح", "حظيرة").default("غرفة").error(Errors('يجب اختيار النوع !')),
   status: Joi.valid("غير شاغرة", "شاغرة", "صيانة", "عزل", "نظافة").default("شاغرة"),
   note: Joi.string().allow('')
 })
@@ -56,12 +57,21 @@ export const RoomSchema = Joi.object({
 export const UpdateRoomSchema = Joi.object({
   _id: Joi.string(),
   hotel: Joi.string().required().error(Errors('يجب اختيار المبنى!')),
-  roomNo: Joi.string().required(),
+  roomNo: Joi.number().required(),
   isRented: Joi.boolean().default(false),
   numberOfBeds: Joi.number().default(1),
-  type: Joi.valid("غرفة", "جناح", "حظيرة").default("غرفة"),
+  type: Joi.valid("غرفة", "جناح", "حظيرة").default("غرفة").error(Errors('يجب اختيار النوع !')),
   status: Joi.valid("غير شاغرة", "شاغرة", "صيانة", "عزل", "نظافة").default("شاغرة"),
   note: Joi.string().allow(''),
   createdAt: Joi.date(),
   updatedAt: Joi.date(),
+})
+
+
+export const AddPatchSchema = Joi.object({
+  start: Joi.number().min(101).error(Errors('تجب ان تختار رقم بداية التسليل')),
+  end: Joi.number().min(5).error(Errors('المجموع الكلي يجب ان لا يقل عن 5')),
+  hotel: Joi.string().required().error(Errors('يجب اختيار المبنى!')),
+  type: Joi.valid("غرفة", "جناح", "حظيرة").default("غرفة").error(Errors('يجب اختيار النوع !')),
+  numberOfBeds: Joi.number().default(1),
 })

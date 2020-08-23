@@ -4,7 +4,6 @@ import { Input, Select, TextArea } from './Input'
 import { Save } from 'react-feather'
 import { db, Alert, CommandSchema } from '../utils'
 import useForm from '../hooks/useForm'
-import Split from './Split'
 import ActionBar from './ActionBar'
 
 const command = {

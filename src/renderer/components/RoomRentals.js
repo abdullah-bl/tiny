@@ -3,8 +3,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import { db, islamicDate } from '../utils'
-import Table from './table'
+import { db } from '../utils'
+import RenderDate from './renderDate'
 
 const RoomRentals = ({ history: { push }, roomId }) => {
   const [data, setData] = useState([])
@@ -23,20 +23,21 @@ const RoomRentals = ({ history: { push }, roomId }) => {
       <div className='col-12'>
         <h4> الساكنين ( {data.length} ) </h4>
       </div>
-      <div className='col-12'>
-        <Table rows={['ت', 'الرقم العسكري', 'الرتبة', 'الاسم', 'تاريخ الخروج']}>
-          {data.map((d, index) =>
-            <tr key={d._id} onClick={() => push(`/reservation/${d._id}`)}>
-              <td>{index + 1}</td>
-              <td>{d.id}</td>
-              <td>{d.rank}</td>
-              <td>{d.name}</td>
-              <td>{d.checkOut ? islamicDate(d.checkOut) : ''}</td>
-
-            </tr>
-          )}
-        </Table>
-      </div>
+      {data.map((d, index) =>
+        <div className='col-12' key={d._id} onClick={() => push(`/reservation/${d._id}`)}>
+          <div className='row'>
+            <div className='col-12 item'>
+              <span>ت : {index + 1}</span>
+              <span>الرقم العسكري : {d.id}</span>
+              <span>الرتبة : {d.rank}</span>
+              <span>الاسم : {d.name}</span>
+              <span>تاريخ الدخول : <RenderDate date={d.checkIn} /> </span>
+              <span>تاريخ الخروج : {data.checkOut ? <RenderDate date={data.checkOut} /> : 'لم يتم الخروج'} </span>
+              <hr />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

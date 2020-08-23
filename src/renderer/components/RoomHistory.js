@@ -47,7 +47,7 @@ const RoomHistory = ({ roomId }) => {
         <div className='col-12' key={d._id}>
           <div className='row'>
             <div className='col-8'>
-              <span> رقم الطلب : {index + 1} </span> <br />
+              <span> رقم الطلب : {d.orderNo} </span> <br />
               <span> نوع الطلب :  {d.type} </span> <br />
               <span>حالة الطلب :  {d.done ? 'تم التنفيذ' : 'تحت الاجراء'}</span>
             </div>

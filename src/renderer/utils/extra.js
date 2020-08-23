@@ -1,5 +1,9 @@
 
 import db from './db'
+import { dialog, remote } from './index'
+const { join } = window.require('path')
+const pk = window.require('backup')
+
 
 export const beforeInsertRoom = async query => {
   let room = await db.Residence.findOne(query)
@@ -71,15 +75,15 @@ export const CountNights = (checkIn, checkOut = new Date().setHours(9, 0, 0, 0))
 
 export const NightsText = (nights = 0) => {
   if (nights === 0) {
-    return `لم يكمل الليلة`
+    return `لم يكمل يوم`
   } else if (nights === 1) {
-    return `ليلة واحدة`
+    return `يوم واحد`
   } else if (nights === 2) {
-    return 'ليلتين'
+    return 'يومين'
   } else if (nights < 10) {
-    return `${nights} ليالي`
+    return `${nights} أيام`
   }
-  return `${nights} ليلة`
+  return `${nights} يوم`
 }
 
 
@@ -98,4 +102,25 @@ export const years = () => {
     a.push(y)
   }
   return a
+}
+
+
+export const Backup = async () => {
+  const filename = await dialog.showSaveDialogSync({ title: 'اختر مكان حفظ النسخة الاحتياطية' })
+  const dbPath = join(remote.app.getPath('userData'), './data')
+  if (filename) {
+    pk.backup(dbPath, `${filename}-${new Date().getTime()}.backup`)
+    alert('تم حفظ النسخة الاحتياطية بنجاح')
+  }
+}
+
+
+export const Restore = async () => {
+  const file = await dialog.showOpenDialogSync({ properties: ['openFile'], filters: [{ name: 'Backup', extensions: ['.backup'] }] })[0]
+  const dbPath = join(remote.app.getPath('userData'), './data')
+  if (file) {
+    pk.restore(file, dbPath)
+  }
+  alert('تم استعادة النسخة الاحتاطية بنجاح')
+  location.reload()
 }

@@ -1,8 +1,7 @@
 
-import React, { useEffect, useState, memo } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'unistore/react'
-import { Plus, Filter } from 'react-feather'
+import { Filter } from 'react-feather'
 
 import Group from './Group'
 import { Search, Select } from './Input'
@@ -26,7 +25,7 @@ const Residence = ({ hotels, status }) => {
       setQuery({
         $or: [
           { hotel: new RegExp(value) },
-          { roomNo: new RegExp(value) },
+          { roomNo: Number(value) },
           { status: new RegExp(value) },
           { type: new RegExp(value) },
         ]
@@ -52,10 +51,6 @@ const Residence = ({ hotels, status }) => {
         </div>
       </main>
       <ActionBar>
-        <Link to='add'>
-          <span>اضافة سكن</span>
-          <Plus />
-        </Link>
         <Search placeholder='بحث...' onChange={onSearch} />
         <a className='disabled'>
           <span> تصفية </span>

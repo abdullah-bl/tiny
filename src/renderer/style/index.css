@@ -14,6 +14,20 @@
 	--orange: #ff905a;
 }
 
+::-webkit-scrollbar {
+	width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -302,4 +316,16 @@ hr {
 	justify-content: space-between;
 	align-items: center;
 	align-content: center;
+}
+
+h4 > span {
+	font-weight: normal !important;
+}
+
+.item > span {
+	display: block;
+}
+
+.item:hover {
+	background: whitesmoke;
 }

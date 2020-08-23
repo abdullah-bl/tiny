@@ -2,22 +2,35 @@
 
 import React, { useEffect, useState } from 'react'
 import { connect } from 'unistore/react'
-import { Trash2, Database, Meh } from 'react-feather'
+import { Trash2, Database, Meh, FolderPlus, FolderMinus, PlusSquare } from 'react-feather'
 import ActionBar from './ActionBar'
 import { TextArea, Input } from './Input'
+import { Link } from 'react-router-dom'
+import { initialState } from '../store'
+import { db, Backup, Restore } from '../utils'
 
 const actions = {
   set(state, payload) {
     return { ...state, ...payload }
+  },
+  reset(state, payload) {
+    return { ...initialState }
   }
 }
 
-const Settings = ({ ranks, hotels, barnRate, roomRate, suiteRate, units, set }) => {
+const Settings = ({ ranks, hotels, barnRate, roomRate, suiteRate, units, set, reset }) => {
   const caption = 'يجب الفصل بين الكلمات بسطر جديد بأستخدام مفتاح إنتر  '
   const onChange = e => set({ [e.target.id]: e.target.value.trim() })
-  const deleteAll = () => { }
-  const backup = () => { }
-  const restore = () => { }
+  const deleteAll = async () => {
+    let c = confirm('هل انت متاكد تريد حذف جميع البيانات ؟')
+    if (c) {
+      reset()
+      await db.History.remove({}, { multi: true })
+      await db.Reservation.remove({}, { multi: true })
+      await db.Residence.remove({}, { multi: true })
+      location.reload()
+    }
+  }
 
   return (
     <>
@@ -53,16 +66,28 @@ const Settings = ({ ranks, hotels, barnRate, roomRate, suiteRate, units, set }) 
         </div>
       </main>
       <ActionBar>
+        <Link to='/add'>
+          <span> اضف سكن </span>
+          <PlusSquare />
+        </Link>
+        <Link to='/add-patch'>
+          <span> اضف  مجموعة إسكان </span>
+          <FolderPlus />
+        </Link>
+        <Link to='/checkout-patch'>
+          <span> تسجيل خروج جماعي </span>
+          <FolderMinus />
+        </Link>
         <a onClick={deleteAll}>
           <span>حذف قاعدة البيانات</span>
           <Trash2 />
         </a>
-        <a onClick={backup} className=''>
-          <span>Backup</span>
+        <a onClick={Backup} className=''>
+          <span>إنشاء نسخة احتياطية</span>
           <Database />
         </a>
-        <a onClick={restore} className=''>
-          <span>Restore Backup</span>
+        <a onClick={Restore} className=''>
+          <span>إعادة النسخة الاحتياطية</span>
           <Database />
         </a>
         <a className='disabled'>

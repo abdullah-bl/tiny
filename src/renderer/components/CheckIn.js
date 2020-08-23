@@ -1,11 +1,19 @@
 
 import React, { useState, useEffect } from 'react'
 import { LogIn, UserCheck } from 'react-feather'
+import DatePicker from "@deskpro/react-datepicker-hijri"
+import moment from "moment-hijri"
 import { connect } from 'unistore/react'
+
 import { Input, Select } from './Input'
 import { db, GustSchema, Alert, islamicDate } from '../utils'
 import useForm from '../hooks/useForm'
 import ActionBar from './ActionBar'
+
+import "@deskpro/react-datepicker-hijri/dist/react-datepicker.css"
+
+import 'moment/locale/ar'
+
 
 const gust = {
   id: '',
@@ -26,11 +34,13 @@ const CheckIn = ({ ranks, units, history: { goBack }, match: { params: { _id } }
     set({ roomId: _id })
   }, [_id])
 
+  const onDayClick = (checkIn, e) => set({ ...state, checkIn: new Date(checkIn) })
+
   async function save() {
     try {
       let doc = await GustSchema.validateAsync(state)
       let old = await db.Reservation.findOne({ id: doc.id, paid: false })
-      if (old) throw Error('لا يمكن تسجيل دخول النزيل لاكثر من سكن واحد!')
+      if (old) throw Error(`${doc.name} تم تسجلة مسبقاً و لم يتم تسجيل الخروج!`)
       await db.Reservation.insert(doc)
       await db.Residence.update({ _id }, { $set: { isRented: true, status: 'غير شاغرة' } })
       Alert({ message: 'تم بنجاح', detail: `تم تسجيل الدخول لـ (${doc.name}) ` })
@@ -65,8 +75,19 @@ const CheckIn = ({ ranks, units, history: { goBack }, match: { params: { _id } }
             {/* <Input defaultValue={state.unit} onChange={onChange} label='الوحدة' id='unit' placeholder='الوحدة...' /> */}
             <Select label='اختر الوحدة' id='unit' defaultValue={state.unit} onChange={onChange} options={renderUnits} />
           </div>
-          <div className='col-6'>
-            <Input defaultValue={state.checkIn} onChange={onChange} label='تاريخ الدخول' id='checkIn' type='date' min='01/01/2020' caption={state.checkIn && `الموافق ${islamicDate(new Date(state.checkIn))}`} />
+          <div className='col-12'>
+            <label htmlFor='checkIn'>تاريخ الدخول</label>
+            <DatePicker
+              inline
+              id='checkIn'
+              calendar="hijri"
+              locale="ar-SA"
+              selected={moment(state.checkIn)}
+              onChange={onDayClick} />
+            <p style={{ fontSize: 12 }}>
+              {state.checkIn && `الموافق ${islamicDate(new Date(state.checkIn))}`}
+            </p>
+            {/* <Input defaultValue={state.checkIn} onChange={onChange} label='تاريخ الدخول' id='checkIn' type='date' min='01/01/2020' caption={state.checkIn && `الموافق ${islamicDate(new Date(state.checkIn))}`} /> */}
           </div>
         </div>
       </main>
