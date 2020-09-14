@@ -51,21 +51,26 @@
 html {
 	box-sizing: border-box;
 }
+
 *,
 *:before,
 *:after {
 	box-sizing: inherit;
 }
+
 html,
 body {
 	margin: 0;
 	font-family: 'Quest', 'Segoe UI', sans-serif;
+	/* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
 	direction: rtl;
 	user-select: none;
 	background: white;
 	color: black;
 	box-sizing: border-box;
 	overflow: hidden;
+	font-size: 16px;
+	/* font-weight: 300 !important; */
 	/* height: 100vh; */
 }
 
@@ -88,6 +93,7 @@ h6 {
 	font-weight: 600;
 	line-height: 1.2;
 }
+
 p {
 	margin-top: 10px;
 	color: rgb(37, 37, 37);
@@ -108,14 +114,14 @@ p {
 	overflow-x: hidden;
 }
 
-#app > main {
+#app>main {
 	flex: 1;
 	padding: 0;
 	height: 100vh;
 	overflow: scroll;
 }
 
-#app > header > a {
+#app>header>a {
 	width: 100%;
 }
 
@@ -173,7 +179,7 @@ table {
 	text-align: right;
 }
 
-thead > tr {
+thead>tr {
 	background: whitesmoke;
 }
 
@@ -200,7 +206,8 @@ th {
 	padding: 0.5rem;
 	text-align: right;
 }
-tbody > tr:hover {
+
+tbody>tr:hover {
 	background: whitesmoke;
 }
 
@@ -212,7 +219,7 @@ div.card {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 1em 2em;
+	padding: 1em 0em;
 	margin: 0.5em;
 	background: white;
 	text-align: right;
@@ -228,7 +235,7 @@ div.card {
 	text-overflow: ellipsis;
 }
 
-.card > span {
+.card>span {
 	margin: 0.35em;
 }
 
@@ -318,14 +325,54 @@ hr {
 	align-content: center;
 }
 
-h4 > span {
+h4>span {
 	font-weight: normal !important;
 }
 
-.item > span {
+.item>span {
 	display: block;
 }
 
 .item:hover {
 	background: whitesmoke;
+}
+
+
+.number {
+	font-size: 20pt;
+}
+
+.card-bar {
+	display: flex !important;
+	justify-content: space-around;
+	font-size: small;
+	width: 100%;
+
+}
+
+.hd::after {
+	content: '';
+	position: absolute;
+	background: #e2e2e2;
+	top: 40px;
+	right: 15px;
+	width: 3px;
+	height: 35px;
+}
+
+
+.cm::before {
+	content: '';
+	position: absolute;
+	background: #e2e2e2;
+	right: 15px;
+	width: 20px;
+	height: 3px;
+	top: 22px;
+	left: 0;
+}
+
+.cm {
+	margin-right: 30px;
+
 }
