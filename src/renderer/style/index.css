@@ -351,7 +351,7 @@ h4>span {
 }
 
 .hd::after {
-	content: '';
+	/* content: ''; */
 	position: absolute;
 	background: #e2e2e2;
 	top: 40px;
@@ -362,7 +362,7 @@ h4>span {
 
 
 .cm::before {
-	content: '';
+	/* content: ''; */
 	position: absolute;
 	background: #e2e2e2;
 	right: 15px;

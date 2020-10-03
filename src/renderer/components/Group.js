@@ -1,7 +1,6 @@
 import React, { useState, useEffect, memo } from 'react'
-import { FileText, AlertCircle, UserCheck } from 'react-feather'
-import { db, groupBy, setColor } from '../utils'
-import { withRouter } from 'react-router-dom'
+import { AlertCircle } from 'react-feather'
+import { db, groupBy } from '../utils'
 import Card from './Card'
 
 const RenderRooms = ({ data }) => {
