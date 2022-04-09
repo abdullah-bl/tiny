@@ -18,7 +18,7 @@
 		"electron-store": "^5.2.0",
 		"electron-util": "^0.14.1",
 		"match-sorter": "^4.1.0",
-		"moment": "^2.27.0",
+		"moment": "^2.29.2",
 		"moment-hijri": "^2.1.2",
 		"mousetrap": "^1.6.5",
 		"prop-types": "^15.7.2",
